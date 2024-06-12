@@ -16,7 +16,7 @@ import { link as linkStyles } from "@nextui-org/theme";
 import NextLink from "next/link";
 import clsx from "clsx";
 import ConnectButton from "./connect-button";
-import { useWallet } from '@txnlab/use-wallet-react'
+import { useWallet } from '@txnlab/use-wallet'
 import { siteConfig } from "@/config/site";
 import { ThemeSwitch } from "@/components/theme-switch";
 import {
