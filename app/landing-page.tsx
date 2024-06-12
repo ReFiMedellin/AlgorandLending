@@ -17,7 +17,7 @@ export default function LandingPage() {
           in your local comunnities
         </h1>
         <h2 className={subtitle({ class: "mt-4" })}>
-          Lend and Borrow De-Colateralized trust in your people.
+          Lend and Borrow De-Colateralized trust in people.
         </h2>
       </div>
 
@@ -41,14 +41,6 @@ export default function LandingPage() {
           <GithubIcon size={20} />
           GitHub
         </Link>
-      </div>
-
-      <div className="mt-8">
-        <Snippet hideCopyButton hideSymbol variant="flat">
-          <span>
-            Get started <Code color="primary">Connect Wallet</Code>
-          </span>
-        </Snippet>
       </div>
     </section>
   );
