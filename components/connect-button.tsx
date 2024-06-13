@@ -7,11 +7,13 @@ import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Avatar, User } f
 import { copyToClipboard } from './copy-to-clipboard';
 import { ClipboardIcon } from '@heroicons/react/20/solid'
 import { walletPretier } from '@/lib/getWalletPrettier';
+import { useTranslations } from "next-intl";
 
 export default function ConnectButton({ position }: any) {
     const { wallets, activeWallet, activeAccount } = useWallet()
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [backdrop, setBackdrop] = React.useState('opaque')
+    const t = useTranslations("Wallet");
 
     const getWalletIcon = (wallet: any) => {
         return <img
@@ -44,7 +46,7 @@ export default function ConnectButton({ position }: any) {
                             variant={activeWallet ? "shadow" : 'bordered'}
                             color={activeWallet ? "primary" : 'secondary'}
                         >
-                            {!activeWallet ? 'Connect Wallet' : `${walletPretier(activeAccount?.address, 4)}`}
+                            {!activeWallet ? t("connect-btn"): `${walletPretier(activeAccount?.address, 4)}`}
                         </Button>
                     </DropdownTrigger>
                     {!activeWallet &&

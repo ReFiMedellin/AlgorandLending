@@ -19,6 +19,7 @@ import ConnectButton from "./connect-button";
 import { useWallet } from '@txnlab/use-wallet'
 import { siteConfig } from "@/config/site";
 import { ThemeSwitch } from "@/components/theme-switch";
+import { useTranslations } from "next-intl";
 import {
   TwitterIcon,
   GithubIcon,
@@ -29,6 +30,7 @@ import LocaleSwitcher from "./locale-switcher";
 
 export const Navbar = () => {
   const { wallets, activeWallet, activeAccount } = useWallet()
+  const t = useTranslations("Index");
 
   return (
     <NextUINavbar maxWidth="xl" position="sticky">

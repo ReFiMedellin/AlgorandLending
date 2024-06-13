@@ -9,5 +9,8 @@
         "btn-2": "GitHub",
         "span-1": "Considere nos apoiar",
         "footer": "Impulsionado por"
+    },
+    "Wallet": {
+        "connect-btn": "Conectar Carteira"
     }
 }

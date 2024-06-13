@@ -9,5 +9,8 @@
         "btn-2": "GitHub",
         "span-1": "Unterstützen Sie uns",
         "footer": "Angetrieben von"
+    }, 
+    "Wallet": {
+        "connect-btn": "Verbind Portemonnee"
     }
 }

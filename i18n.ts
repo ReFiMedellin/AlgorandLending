@@ -3,7 +3,7 @@ import { getRequestConfig } from "next-intl/server";
 import {Pathnames, LocalePrefix} from 'next-intl/routing';
 
 // Can be imported from a shared config
-export const locales = ["en", "fr", "es", "de"];
+export const locales = ["en", "fr", "es", "de", "br"];
 
 export const pathnames: Pathnames<typeof locales> = {
   '/': '/',
