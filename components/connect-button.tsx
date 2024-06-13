@@ -6,6 +6,7 @@ import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDi
 import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Avatar, User } from "@nextui-org/react";
 import { copyToClipboard } from './copy-to-clipboard';
 import { ClipboardIcon } from '@heroicons/react/20/solid'
+import { walletPretier } from '@/lib/getWalletPrettier';
 
 export default function ConnectButton({ position }: any) {
     const { wallets, activeWallet, activeAccount } = useWallet()
@@ -19,10 +20,6 @@ export default function ConnectButton({ position }: any) {
             alt={`${wallet.name} icon`}
             src={wallet.icon}
         />
-    }
-
-    const walletPretier = (s: string, n: number) => {
-        return `${s.slice(0, n)}...${s.slice(-n)}`
     }
 
     const handleOpen = () => {
