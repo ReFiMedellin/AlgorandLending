@@ -1,13 +1,18 @@
 import "@/styles/globals.css";
 import { Metadata, Viewport } from "next";
-import { Link } from "@nextui-org/link";
 import clsx from "clsx";
 import { Providers } from "./providers";
 import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
 import { Navbar } from "@/components/navbar";
 import { NextIntlClientProvider } from 'next-intl';
-import { getMessages } from 'next-intl/server';
+import {Inter} from 'next/font/google';
+import { Footer } from "@/components/footer";
+import {
+  getMessages,
+  getTranslations,
+  unstable_setRequestLocale
+} from 'next-intl/server';
 
 export const metadata: Metadata = {
   title: {
@@ -20,6 +25,17 @@ export const metadata: Metadata = {
   },
 };
 
+//TODO
+async function generateMetadata({
+  params: {locale}
+}: Omit<Props, 'children'>) {
+  const t = await getTranslations({locale, namespace: 'LocaleLayout'});
+
+  return {
+    metadata
+  };
+} 
+
 export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "white" },
@@ -27,17 +43,25 @@ export const viewport: Viewport = {
   ],
 };
 
+type Props = {
+  children: React.ReactNode;
+  params: {locale: string};
+};
+
+const inter = Inter({subsets: ['latin']});
+
 export default async function RootLayout({
   children,
-}: {
-  children: React.ReactNode;
-}) {
+  params: {locale}
+}: Props) {
+  // Enable static rendering
+  unstable_setRequestLocale(locale);
   const messages = await getMessages();
   return (
-    <html suppressHydrationWarning lang="en">
+    <html suppressHydrationWarning lang={locale}>
       <head />
       <body
-        className={clsx(
+        className={clsx(inter.className,
           "min-h-screen bg-background font-sans antialiased",
           fontSans.variable,
         )}
@@ -49,17 +73,7 @@ export default async function RootLayout({
               <main className="container mx-auto max-w-7xl pt-8 px-6 flex-grow">
                 {children}
               </main>
-              <footer className="w-full flex items-center justify-center py-3">
-                <Link
-                  isExternal
-                  className="flex items-center gap-1 text-current"
-                  href="https://refimedellin.org"
-                  title="nextui.org homepage"
-                >
-                  <span className="text-default-600">Powered by</span>
-                  <p className="text-primary">ReFiMedellín.org</p>
-                </Link>
-              </footer>
+              <Footer />
             </div>
           </Providers>
         </NextIntlClientProvider>

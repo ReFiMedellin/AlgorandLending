@@ -1,6 +1,13 @@
 {
     "Index": {
-        "hello": "Ayez un impact dans vos communautés locales",
-        "welcome": "Prêts et emprunts sans garantie Confiance dans les gens."
+        "locale": "fr",
+        "hello-1": "Faites",
+        "hello-2": "Impact",
+        "hello-3": "dans les communautés locales",
+        "welcome": "Prêtez et empruntez de la confiance décollatéralisée entre les gens.",
+        "btn-1": "Documentation",
+        "btn-2": "GitHub",
+        "span-1": "Envisagez de nous soutenir",
+        "footer": "Propulsé par"
     }
 }

@@ -1,6 +1,13 @@
 {
     "Index": {
-        "hello": "Make Impact in your local communities",
-        "welcome": "Lend and Borrow De-Colateralized trust in people."
+        "locale": "en",
+        "hello-1": "Make",
+        "hello-2": "Impact",
+        "hello-3": "in local communities",
+        "welcome": "Lend and Borrow De-Colateralized trust in people.",
+        "btn-1": "Documentation",
+        "btn-2": "GitHub",
+        "span-1": "Consider Supporting Us",
+        "footer": "Powered By"
     }
 }

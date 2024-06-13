@@ -15,11 +15,11 @@ export default function LandingPage() {
     <>
       {!activeAccount && <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
         <div className="inline-block max-w-lg text-center justify-center">
-          <h1 className={title()}>Make&nbsp;</h1>
-          <h1 className={title({ color: "green" })}>Impact&nbsp;</h1>
+          <h1 className={title()}>{t("hello-1")}&nbsp;</h1>
+          <h1 className={title({ color: "green" })}>{t("hello-2")}&nbsp;</h1>
           <br />
           <h1 className={title()}>
-            in your local communities
+           {t("hello-3")}
           </h1>
           <h2 className={subtitle({ class: "mt-4" })}>
             {t("welcome")}
@@ -36,7 +36,7 @@ export default function LandingPage() {
             })}
             href={siteConfig.links.docs}
           >
-            Documentation
+            {t("btn-1")}
           </Link>
           <Link
             isExternal
@@ -44,20 +44,19 @@ export default function LandingPage() {
             href={siteConfig.links.github}
           >
             <GithubIcon size={20} />
-            GitHub
+            {t("btn-2")}
           </Link>
         </div>
         <div className="mt-8">
           <Snippet hideCopyButton hideSymbol variant="flat">
             <span>
-              Consider Supporting Us &nbsp; 👉 &nbsp;
+            {t("span-1")} &nbsp; 👉 &nbsp;
               <Link
                 isExternal
                 href='https://giveth.io/project/refi-medellin'
               >
                 <Code color="primary">giveth.io/refi-medellin</Code>
               </Link>
-
             </span>
           </Snippet>
         </div>

@@ -1,6 +1,13 @@
 {
     "Index": {
-        "hello": "Haga impacto en sus comunidades locales",
-        "welcome": "Prestar y pedir prestado sin garantía Confianza en las personas."
+        "locale": "es",
+        "hello-1": "Hacer",
+        "hello-2": "Impacto",
+        "hello-3": "en las comunidades locales",
+        "welcome": "Presta y toma prestada confianza descolateralizada entre las personas.",
+        "btn-1": "Documentación",
+        "btn-2": "GitHub",
+        "span-1": "Considera Apoyarnos",
+        "footer": "Impulsado por"
     }
 }

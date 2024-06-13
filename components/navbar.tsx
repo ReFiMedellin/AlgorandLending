@@ -23,11 +23,9 @@ import {
   TwitterIcon,
   GithubIcon,
   DiscordIcon,
-  HeartFilledIcon,
-  SearchIcon,
   Logo,
 } from "@/components/icons";
-import { SelectLang } from "./select-lang";
+import LocaleSwitcher from "./locale-switcher";
 
 export const Navbar = () => {
   const { wallets, activeWallet, activeAccount } = useWallet()
@@ -76,7 +74,7 @@ export const Navbar = () => {
             </Link>
           </>}
           <ThemeSwitch />
-          <SelectLang />
+          <LocaleSwitcher />
         </NavbarItem>
         <NavbarItem className="hidden md:flex">
           <ConnectButton position={'nav'} />
@@ -85,7 +83,7 @@ export const Navbar = () => {
 
       <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
         <ThemeSwitch />
-        <SelectLang />
+        <LocaleSwitcher />
         <NavbarMenuToggle />
       </NavbarContent>
 
