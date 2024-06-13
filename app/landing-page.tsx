@@ -1,11 +1,11 @@
 'use client'
 import { Link } from "@nextui-org/link";
 import { button as buttonStyles } from "@nextui-org/theme";
+import { Snippet, Code } from "@nextui-org/react";
 import { siteConfig } from "@/config/site";
 import { title, subtitle } from "@/components/primitives";
 import { GithubIcon } from "@/components/icons";
 import { useWallet } from '@txnlab/use-wallet-react'
-import { Breadcrumb } from "@/components/breadcrumb";
 
 export default function LandingPage() {
   const { activeAccount } = useWallet()
@@ -17,7 +17,7 @@ export default function LandingPage() {
           <h1 className={title({ color: "green" })}>Impact&nbsp;</h1>
           <br />
           <h1 className={title()}>
-            in your local comunnities
+            in your local communities
           </h1>
           <h2 className={subtitle({ class: "mt-4" })}>
             Lend and Borrow De-Colateralized trust in people.
@@ -44,6 +44,20 @@ export default function LandingPage() {
             <GithubIcon size={20} />
             GitHub
           </Link>
+        </div>
+        <div className="mt-8">
+          <Snippet hideCopyButton hideSymbol variant="flat">
+            <span>
+              Consider Supporting Us &nbsp; 👉 &nbsp;
+                <Link
+                  isExternal
+                  href='https://giveth.io/project/refi-medellin'
+                >
+                  <Code color="primary">giveth.io/refi-medellin</Code>
+                </Link>
+                
+            </span>
+          </Snippet>
         </div>
       </section>}
     </>
