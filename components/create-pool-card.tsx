@@ -1,11 +1,13 @@
 import React from 'react'
-import { Card, CardHeader, CardBody, CardFooter, Divider, Link, Image, Button } from "@nextui-org/react";
+import { Card, CardHeader, CardBody, CardFooter, Link, Image, Button } from "@nextui-org/react";
 import { Accordion, AccordionItem } from "@nextui-org/accordion";
 import { Input } from "@nextui-org/react";
 import { useWallet as useWalletReact } from '@txnlab/use-wallet-react'
 import { LendingPoolClient } from 'artifacts/LendingPoolClient';
 import { getAlgodConfigFromEnvironment } from '../lib/getAlgoClientConfigs'
 import AlgorandClient from '@algorandfoundation/algokit-utils/types/algorand-client'
+import { walletPretier } from '@/lib/getWalletPrettier';
+import toast from 'react-hot-toast'
 
 export const CreatePoolCard = () => {
     const { activeAddress, transactionSigner } = useWalletReact()
@@ -17,7 +19,7 @@ export const CreatePoolCard = () => {
     const algorand = AlgorandClient.fromConfig({ algodConfig })
     algorand.setDefaultSigner(transactionSigner)
     const genRanHex = (size: number) => [...Array(size)].map(() => Math.floor(Math.random() * 16).toString(16)).join('');
-    const img = `https://www.thecolorapi.com/id?format=svg&named=false&hex=${genRanHex(6)}`
+    //const img = `https://www.thecolorapi.com/id?format=svg&named=false&hex=${genRanHex(6)}`
 
     const lendingPool = new LendingPoolClient(
         {
@@ -30,7 +32,6 @@ export const CreatePoolCard = () => {
     const handleCreate = async () => {
         setLoading(true)
         try {
-            console.log(`Calling createApplication`)
             await lendingPool.create.createApplication(
                 {
                     proposal,
@@ -38,6 +39,10 @@ export const CreatePoolCard = () => {
                 { sender },
             )
             const { appAddress } = await lendingPool.appClient.getAppReference();
+            toast.success(`Pool ${walletPretier(appAddress, 4)} Created`, {
+                id: 'txn',
+                duration: 5000
+            })
         } catch {
             setLoading(false)
         } finally {
