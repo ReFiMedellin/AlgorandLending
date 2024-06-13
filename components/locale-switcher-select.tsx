@@ -21,6 +21,7 @@ export default function LocaleSwitcherSelect({
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const pathname = usePathname();
+  console.log(pathname)
   const params = useParams();
 
   function onSelectChange(event: ChangeEvent<HTMLSelectElement>) {
