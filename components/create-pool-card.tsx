@@ -16,6 +16,8 @@ export const CreatePoolCard = () => {
     const algodConfig = getAlgodConfigFromEnvironment()
     const algorand = AlgorandClient.fromConfig({ algodConfig })
     algorand.setDefaultSigner(transactionSigner)
+    const genRanHex = (size: number) => [...Array(size)].map(() => Math.floor(Math.random() * 16).toString(16)).join('');
+    const img = `https://www.thecolorapi.com/id?format=svg&named=false&hex=${genRanHex(6)}`
 
     const lendingPool = new LendingPoolClient(
         {
