@@ -23,7 +23,7 @@ export const siteConfig = {
     github: "https://github.com/refimedellin",
     twitter: "https://twitter.com/refimedellin",
     docs: "https://docs.algorand.lat",
-    discord: "https://refimedellin.org",
-    sponsor: "https://refimedellin.org",
+    discord: "https://discord.gg/nW9heh9X",
+    sponsor: "https://giveth.io/donate/refi-medellin",
   },
 };
