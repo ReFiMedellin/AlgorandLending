@@ -1,7 +1,7 @@
 'use client'
 import React, { useEffect } from 'react'
 import { useWallet } from '@txnlab/use-wallet-react'
-import { CreatePoolCard } from '../components/create-pool-card';
+import { CreatePoolCard } from '../../components/create-pool-card';
 import { PoolCard } from '@/components/pool-card';
 import { ALGO_ADMIN } from '@/config/env';
 

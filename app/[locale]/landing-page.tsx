@@ -6,9 +6,11 @@ import { siteConfig } from "@/config/site";
 import { title, subtitle } from "@/components/primitives";
 import { GithubIcon } from "@/components/icons";
 import { useWallet } from '@txnlab/use-wallet-react'
+import { useTranslations } from "next-intl";
 
 export default function LandingPage() {
   const { activeAccount } = useWallet()
+  const t = useTranslations("Index");
   return (
     <>
       {!activeAccount && <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
@@ -20,7 +22,7 @@ export default function LandingPage() {
             in your local communities
           </h1>
           <h2 className={subtitle({ class: "mt-4" })}>
-            Lend and Borrow De-Colateralized trust in people.
+            {t("welcome")}
           </h2>
         </div>
 
@@ -49,13 +51,13 @@ export default function LandingPage() {
           <Snippet hideCopyButton hideSymbol variant="flat">
             <span>
               Consider Supporting Us &nbsp; 👉 &nbsp;
-                <Link
-                  isExternal
-                  href='https://giveth.io/project/refi-medellin'
-                >
-                  <Code color="primary">giveth.io/refi-medellin</Code>
-                </Link>
-                
+              <Link
+                isExternal
+                href='https://giveth.io/project/refi-medellin'
+              >
+                <Code color="primary">giveth.io/refi-medellin</Code>
+              </Link>
+
             </span>
           </Snippet>
         </div>

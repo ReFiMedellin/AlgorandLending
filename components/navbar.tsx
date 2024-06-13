@@ -27,6 +27,7 @@ import {
   SearchIcon,
   Logo,
 } from "@/components/icons";
+import { SelectLang } from "./select-lang";
 
 export const Navbar = () => {
   const { wallets, activeWallet, activeAccount } = useWallet()
@@ -64,17 +65,18 @@ export const Navbar = () => {
       >
         <NavbarItem className="hidden sm:flex gap-2">
           {!activeWallet && <>
-          <Link isExternal aria-label="Twitter" href={siteConfig.links.twitter}>
-            <TwitterIcon className="text-default-500" />
-          </Link>
-          <Link isExternal aria-label="Github" href={siteConfig.links.github}>
-            <GithubIcon className="text-default-500" />
-          </Link>
-          <Link isExternal aria-label="Discord" href={siteConfig.links.discord}>
-            <DiscordIcon className="text-default-500" />
-          </Link>
+            <Link isExternal aria-label="Twitter" href={siteConfig.links.twitter}>
+              <TwitterIcon className="text-default-500" />
+            </Link>
+            <Link isExternal aria-label="Github" href={siteConfig.links.github}>
+              <GithubIcon className="text-default-500" />
+            </Link>
+            <Link isExternal aria-label="Discord" href={siteConfig.links.discord}>
+              <DiscordIcon className="text-default-500" />
+            </Link>
           </>}
           <ThemeSwitch />
+          <SelectLang />
         </NavbarItem>
         <NavbarItem className="hidden md:flex">
           <ConnectButton position={'nav'} />
@@ -83,6 +85,7 @@ export const Navbar = () => {
 
       <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
         <ThemeSwitch />
+        <SelectLang />
         <NavbarMenuToggle />
       </NavbarContent>
 

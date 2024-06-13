@@ -1,17 +1,14 @@
-// /middleware.ts
-import { NextResponse } from 'next/server';
-
-export function middleware(request: Request) {
-
-  // Store current request url in a custom header, which you can read later
-  const requestHeaders = new Headers(request.headers);
-
-  requestHeaders.set('x-url', request.url);
-
-  return NextResponse.next({
-    request: {
-      // Apply new request headers
-      headers: requestHeaders,
-    }
-  });
-}
+import createMiddleware from 'next-intl/middleware';
+ 
+export default createMiddleware({
+  // A list of all locales that are supported
+  locales: ['en', 'es', 'fr'],
+ 
+  // Used when no locale matches
+  defaultLocale: 'en'
+});
+ 
+export const config = {
+  // Match only internationalized pathnames
+  matcher: ['/', '/(en|es|fr)/:path*']
+};

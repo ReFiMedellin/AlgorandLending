@@ -46,13 +46,13 @@ export function Providers({ children, themeProps }: ProvidersProps) {
   return (
     <>
       <CustomToaster />
-      <WalletProvider manager={walletManager}>
-        <NextUIProvider navigate={router.push}>
-          <NextThemesProvider {...themeProps}>
-            {children}
-          </NextThemesProvider>
-        </NextUIProvider>
-      </WalletProvider>
+        <WalletProvider manager={walletManager}>
+          <NextUIProvider navigate={router.push}>
+            <NextThemesProvider {...themeProps}>
+              {children}
+            </NextThemesProvider>
+          </NextUIProvider>
+        </WalletProvider>
     </>
   );
 }

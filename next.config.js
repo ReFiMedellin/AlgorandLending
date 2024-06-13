@@ -1,4 +1,5 @@
-/** @type {import('next').NextConfig} */
+const createNextIntlPlugin = require('next-intl/plugin');
+const withNextIntl = createNextIntlPlugin();
 
 const withPWA = require("@ducanh2912/next-pwa").default({
   cacheOnFrontEndNav: true,
@@ -19,6 +20,7 @@ const withPWA = require("@ducanh2912/next-pwa").default({
   // ... other options you like
 });
 
+/** @type {import('next').NextConfig} */
 const nextConfig = {
     webpack: (config) => {
       // @see https://github.com/WalletConnect/walletconnect-monorepo/issues/1908#issuecomment-1487801131
@@ -29,5 +31,5 @@ const nextConfig = {
     reactStrictMode: true
   }
   
-  module.exports = withPWA(nextConfig)
+  module.exports = withPWA(withNextIntl(nextConfig))
   
