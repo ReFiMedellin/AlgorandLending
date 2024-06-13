@@ -1,15 +1,25 @@
 'use client'
-import { useWallet } from '@txnlab/use-wallet-react'
+import React from 'react';
 import LandingPage from './landing-page'
 import { Dashboard } from './dashboard'
-
+import { Breadcrumb } from '@/components/breadcrumb';
+import { usePathname, useRouter } from 'next/navigation'
+import { useWallet } from '@txnlab/use-wallet-react';
 
 export default function Home() {
-  const { wallets, activeWallet, activeAccount } = useWallet()
+  const { activeAccount } = useWallet()
+  const pathname = usePathname();
+
+  React.useEffect(() => {
+    console.log(`Route changed to: ${pathname}`);
+
+  }, [pathname]);
+  
   return (
     <>
-      {!activeWallet && <LandingPage />}
-      {activeAccount && <Dashboard />}
+      {activeAccount && <Breadcrumb path='/Home' /> }
+      <LandingPage />
+      <Dashboard />
     </>
 
   );

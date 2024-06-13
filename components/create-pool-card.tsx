@@ -6,15 +6,13 @@ import { useWallet as useWalletReact } from '@txnlab/use-wallet-react'
 import { LendingPoolClient } from 'artifacts/LendingPoolClient';
 import { getAlgodConfigFromEnvironment } from '../lib/getAlgoClientConfigs'
 import AlgorandClient from '@algorandfoundation/algokit-utils/types/algorand-client'
-import toast from 'react-hot-toast'
 
 export const CreatePoolCard = () => {
-    const {  activeWallet, activeAddress, transactionSigner } = useWalletReact()
+    const { activeAddress, transactionSigner } = useWalletReact()
     const [loading, setLoading] = React.useState<boolean>(false)
     const [appID, setAppID] = React.useState<number>(0)
     const [proposal, setProposal] = React.useState<string>('')
     const sender = { signer: transactionSigner, addr: activeAddress! }
-
     const algodConfig = getAlgodConfigFromEnvironment()
     const algorand = AlgorandClient.fromConfig({ algodConfig })
     algorand.setDefaultSigner(transactionSigner)
@@ -61,7 +59,6 @@ export const CreatePoolCard = () => {
                     <p className="text-small text-default-500">Lending Pool</p>
                 </div>
             </CardHeader>
-            <Divider />
             <CardBody>
                 <Accordion disabledKeys={["2"]}>
                     <AccordionItem key="1" aria-label="Pool Info" subtitle="Name, Initial Balance, Rate ..." title="Pool Info">
@@ -109,7 +106,6 @@ export const CreatePoolCard = () => {
                     </AccordionItem>
                 </Accordion>
             </CardBody>
-            <Divider />
             <CardFooter className="justify-center">
                 <Button
                     isExternal

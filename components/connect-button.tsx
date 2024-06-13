@@ -19,7 +19,6 @@ export default function ConnectButton({ position }: any) {
             alt={`${wallet.name} icon`}
             src={wallet.icon}
         />
-
     }
 
     const walletPretier = (s: string, n: number) => {
@@ -53,7 +52,7 @@ export default function ConnectButton({ position }: any) {
                     </DropdownTrigger>
                     {!activeWallet &&
                         <DropdownMenu variant="faded" aria-label="Static Actions">
-                            {wallets.map((wallet) => (
+                            {wallets.map((wallet:any) => (
                                 <DropdownItem
                                     key={wallet.id}
                                     startContent={getWalletIcon(wallet.metadata)}
