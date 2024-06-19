@@ -7,14 +7,26 @@ import { title, subtitle } from "@/components/primitives";
 import { GithubIcon } from "@/components/icons";
 import { useWallet } from '@txnlab/use-wallet-react'
 import { useTranslations } from "next-intl";
+import FloatingShape from '@/components/floatingShape';
+
+
+const styles = {
+  display: 'flex',
+  height: '100vh',
+  zIndex: '-99'
+
+}
 
 export default function LandingPage() {
   const { activeAccount } = useWallet()
   const t = useTranslations("Index");
   return (
     <>
-      {!activeAccount && <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
-        <div className="inline-block max-w-lg text-center justify-center">
+     
+      {!activeAccount && <section style={styles} className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
+        <FloatingShape />
+        <div className="inline-block max-w-lg text-center justify-center" style={{zIndex: '99'}}> 
+        
           <h1 className={title()}>{t("hello-1")}&nbsp;</h1>
           <h1 className={title({ color: "green" })}>{t("hello-2")}&nbsp;</h1>
           <br />
@@ -26,7 +38,7 @@ export default function LandingPage() {
           </h2>
         </div>
 
-        <div className="flex gap-3">
+        <div className="flex gap-3" style={{zIndex: '99'}}>
           <Link
             isExternal
             className={buttonStyles({
@@ -47,7 +59,7 @@ export default function LandingPage() {
             {t("btn-2")}
           </Link>
         </div>
-        <div className="mt-8">
+        <div className="mt-8" style={{zIndex: '99'}}>
           <Snippet hideCopyButton hideSymbol variant="flat">
             <span>
             {t("span-1")} &nbsp; 👉 &nbsp;
