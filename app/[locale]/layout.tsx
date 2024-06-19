@@ -6,13 +6,14 @@ import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
 import { Navbar } from "@/components/navbar";
 import { NextIntlClientProvider } from 'next-intl';
-import {Inter} from 'next/font/google';
+import { Inter } from 'next/font/google';
 import { Footer } from "@/components/footer";
 import {
   getMessages,
   getTranslations,
   unstable_setRequestLocale
 } from 'next-intl/server';
+import FloatingShape from '@/components/floatingShape';
 
 export const metadata: Metadata = {
   title: {
@@ -27,14 +28,14 @@ export const metadata: Metadata = {
 
 //TODO
 async function generateMetadata({
-  params: {locale}
+  params: { locale }
 }: Omit<Props, 'children'>) {
-  const t = await getTranslations({locale, namespace: 'LocaleLayout'});
+  const t = await getTranslations({ locale, namespace: 'LocaleLayout' });
 
   return {
     metadata
   };
-} 
+}
 
 export const viewport: Viewport = {
   themeColor: [
@@ -45,14 +46,14 @@ export const viewport: Viewport = {
 
 type Props = {
   children: React.ReactNode;
-  params: {locale: string};
+  params: { locale: string };
 };
 
-const inter = Inter({subsets: ['latin']});
+const inter = Inter({ subsets: ['latin'] });
 
 export default async function RootLayout({
   children,
-  params: {locale}
+  params: { locale }
 }: Props) {
   // Enable static rendering
   unstable_setRequestLocale(locale);
@@ -69,6 +70,7 @@ export default async function RootLayout({
         <NextIntlClientProvider messages={messages}>
           <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
             <div className="relative flex flex-col h-screen">
+              <FloatingShape />
               <Navbar />
               <main className="container mx-auto max-w-7xl pt-8 px-6 flex-grow">
                 {children}

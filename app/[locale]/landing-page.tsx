@@ -7,7 +7,7 @@ import { title, subtitle } from "@/components/primitives";
 import { GithubIcon } from "@/components/icons";
 import { useWallet } from '@txnlab/use-wallet-react'
 import { useTranslations } from "next-intl";
-import FloatingShape from '@/components/floatingShape';
+
 
 
 const styles = {
@@ -24,7 +24,7 @@ export default function LandingPage() {
     <>
      
       {!activeAccount && <section style={styles} className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
-        <FloatingShape />
+        
         <div className="inline-block max-w-lg text-center justify-center" style={{zIndex: '99'}}> 
         
           <h1 className={title()}>{t("hello-1")}&nbsp;</h1>
