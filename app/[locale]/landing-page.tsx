@@ -25,7 +25,7 @@ export default function LandingPage() {
      
       {!activeAccount && <section style={styles} className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
         
-        <div className="inline-block max-w-lg text-center justify-center" style={{zIndex: '99'}}> 
+        <div className="inline-block max-w-lg text-center justify-center"> 
         
           <h1 className={title()}>{t("hello-1")}&nbsp;</h1>
           <h1 className={title({ color: "green" })}>{t("hello-2")}&nbsp;</h1>
@@ -38,7 +38,7 @@ export default function LandingPage() {
           </h2>
         </div>
 
-        <div className="flex gap-3" style={{zIndex: '99'}}>
+        <div className="flex gap-3" >
           <Link
             isExternal
             className={buttonStyles({
@@ -59,7 +59,7 @@ export default function LandingPage() {
             {t("btn-2")}
           </Link>
         </div>
-        <div className="mt-8" style={{zIndex: '99'}}>
+        <div className="mt-8">
           <Snippet hideCopyButton hideSymbol variant="flat">
             <span>
             {t("span-1")} &nbsp; 👉 &nbsp;

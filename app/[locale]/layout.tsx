@@ -71,8 +71,8 @@ export default async function RootLayout({
           <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
             <div className="relative flex flex-col h-screen">
               <FloatingShape />
-              <Navbar />
-              <main className="container mx-auto max-w-7xl pt-8 px-6 flex-grow">
+              <Navbar  />
+              <main className="container mx-auto max-w-7xl pt-8 px-6 flex-grow" style={{zIndex: '9'}}>
                 {children}
               </main>
               <Footer />

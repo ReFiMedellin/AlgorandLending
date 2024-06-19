@@ -3,7 +3,7 @@ import { Card, CardHeader, CardBody, CardFooter, Link, Image, Button } from "@ne
 import { Accordion, AccordionItem } from "@nextui-org/accordion";
 import { Input } from "@nextui-org/react";
 import { useWallet as useWalletReact } from '@txnlab/use-wallet-react'
-import { LendingPoolClient } from 'artifacts/LendingPoolClient';
+import { LendingPoolClient } from '@/artifacts/LendingPoolClient';
 import { getAlgodConfigFromEnvironment } from '../lib/getAlgoClientConfigs'
 import AlgorandClient from '@algorandfoundation/algokit-utils/types/algorand-client'
 import { walletPretier } from '@/lib/getWalletPrettier';
@@ -13,7 +13,8 @@ export const CreatePoolCard = () => {
     const { activeAddress, transactionSigner } = useWalletReact()
     const [loading, setLoading] = React.useState<boolean>(false)
     const [appID, setAppID] = React.useState<number>(0)
-    const [proposal, setProposal] = React.useState<string>('')
+    const [name, setName] = React.useState<string>('')
+    const [rate, setRate] = React.useState<string>('')
     const sender = { signer: transactionSigner, addr: activeAddress! }
     const algodConfig = getAlgodConfigFromEnvironment()
     const algorand = AlgorandClient.fromConfig({ algodConfig })
@@ -31,10 +32,12 @@ export const CreatePoolCard = () => {
 
     const handleCreate = async () => {
         setLoading(true)
+        const poolRate = parseInt(rate)
         try {
             await lendingPool.create.createApplication(
                 {
-                    proposal,
+                    name,
+                    rate: poolRate
                 },
                 { sender },
             )
@@ -43,7 +46,12 @@ export const CreatePoolCard = () => {
                 id: 'txn',
                 duration: 5000
             })
-        } catch {
+        } catch(e) {
+            console.log(e)
+            toast.error(`${e}`, {
+                id: 'txn',
+                duration: 5000
+            })
             setLoading(false)
         } finally {
             setLoading(false)
@@ -68,15 +76,16 @@ export const CreatePoolCard = () => {
             </CardHeader>
             <CardBody>
                 <Accordion disabledKeys={["2"]}>
-                    <AccordionItem key="1" aria-label="Pool Info" subtitle="Name, Initial Balance, Rate ..." title="Pool Info">
+                    <AccordionItem key="1" aria-label="Pool Info" subtitle="Name, Rate" title="Pool Info">
                         <Input
                             key='inside'
                             type="email"
                             label="Name"
                             labelPlacement='inside'
-                            description='Pool Name'
+                            description='Provide a Pool Name'
+                            onChange={(e) => setName(e.target.value)}
                         />
-                        <Input
+                       {/*  <Input
                             label="Balance"
                             placeholder="100"
                             labelPlacement="inside"
@@ -102,13 +111,14 @@ export const CreatePoolCard = () => {
                                 </div>
                             }
                             type="number"
-                        />
+                        /> */}
                         <Input
                             key='inside-2'
                             type="email"
                             label="Rate"
                             labelPlacement='inside'
                             description='Interes Rate'
+                            onChange={(e) => setRate(e.target.value)}
                         />
                     </AccordionItem>
                 </Accordion>
@@ -122,6 +132,7 @@ export const CreatePoolCard = () => {
                     variant='light'
                     color='primary'
                     isLoading={loading}
+                    isDisabled={name == '' && rate == ''}
                     onClick={() => handleCreate()}
                 >
                     Create

@@ -16,6 +16,7 @@ export const Dashboard = () => {
             setCreatedApps(accountInfo['created-apps'])
             return accountInfo
         }
+        console.log(createdApps)
         getAccountInfo()
     }, [activeAccount])
 

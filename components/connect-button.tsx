@@ -8,10 +8,12 @@ import { copyToClipboard } from './copy-to-clipboard';
 import { ClipboardIcon } from '@heroicons/react/20/solid'
 import { walletPretier } from '@/lib/getWalletPrettier';
 import { useTranslations } from "next-intl";
+import { ModalWalletInfo } from './modalWalletInfo';
 
 export default function ConnectButton({ position }: any) {
     const { wallets, activeWallet, activeAccount } = useWallet()
     const { isOpen, onOpen, onClose } = useDisclosure();
+    const [isOpenModal, setIsOpenModal] = React.useState(false)
     const [backdrop, setBackdrop] = React.useState('opaque')
     const t = useTranslations("Wallet");
 
@@ -24,8 +26,12 @@ export default function ConnectButton({ position }: any) {
         />
     }
 
-    const handleOpen = () => {
-        onOpen();
+    const handleOpen = (position: string) => {
+        setIsOpenModal(true)
+    }
+
+    const handleCloseModal = () => {
+        setIsOpenModal(false)
     }
 
     const handleDisconnect = () => {
@@ -43,35 +49,22 @@ export default function ConnectButton({ position }: any) {
                             as={Link}
                             className="text-sm font-normal text-default-600 bg-default-100"
                             startContent={''}
-                            variant={activeWallet ? "shadow" : 'bordered'}
-                            color={activeWallet ? "primary" : 'secondary'}
+                            variant='bordered'
+                            color='secondary'
                         >
-                            {!activeWallet ? t("connect-btn"): `${walletPretier(activeAccount?.address, 4)}`}
+                            {t("connect-btn")}
                         </Button>
                     </DropdownTrigger>
-                    {!activeWallet &&
-                        <DropdownMenu variant="faded" aria-label="Static Actions">
-                            {wallets.map((wallet:any) => (
-                                <DropdownItem
-                                    key={wallet.id}
-                                    startContent={getWalletIcon(wallet.metadata)}
-                                >
-                                    <button onClick={() => wallet.connect()}>{wallet.metadata.name}</button>
-                                </DropdownItem>
-                            ))}
-                        </DropdownMenu>
-                    }
-                    {activeWallet &&
-                        <DropdownMenu variant="faded" aria-label="Static Actions">
-                            <DropdownItem key='1'>
-                                <h2>Active Wallet</h2>
-                                <p>{activeWallet.metadata.name}</p>
-                                <h2>Active Account</h2>
-                                <p>{walletPretier(activeAccount?.address, 8)}</p>
-                                <button onClick={() => handleDisconnect()}>Disconnect</button>
+                    <DropdownMenu variant="faded" aria-label="Static Actions">
+                        {wallets.map((wallet: any) => (
+                            <DropdownItem
+                                key={wallet.id}
+                                startContent={getWalletIcon(wallet.metadata)}
+                            >
+                                <button onClick={() => wallet.connect()}>{wallet.metadata.name}</button>
                             </DropdownItem>
-                        </DropdownMenu>
-                    }
+                        ))}
+                    </DropdownMenu>
                 </Dropdown>}
 
             {activeWallet && position == 'nav' &&
@@ -82,7 +75,7 @@ export default function ConnectButton({ position }: any) {
                     startContent={''}
                     variant='flat'
                     color='primary'
-                    onClick={() => handleOpen()}
+                    onClick={() => handleOpen(position)}
                 >
                     {!activeWallet ? 'Connect Wallet' : `${walletPretier(activeAccount?.address, 4)}`}
                 </Button>
@@ -95,43 +88,19 @@ export default function ConnectButton({ position }: any) {
                     startContent={''}
                     variant='faded'
                     color='primary'
-                    onClick={() => handleOpen()}
+                    onClick={() => handleOpen(position)}
                 >
                     {!activeWallet ? 'Connect Wallet' : `${walletPretier(activeAccount?.address, 4)}`}
                 </Button>
             }
 
-            <Modal backdrop={'opaque'} isOpen={isOpen} onClose={onClose}>
-                <ModalContent>
-                    {(onClose) => (
-                        <>
-                            <ModalBody>
-                                <h2>Active Account</h2>
-                                <Button
-                                    data-clipboard-text={activeAccount.address}
-                                    startContent={getWalletIcon(activeWallet.metadata)}
-                                    data-clipboard-message="Address copied to clipboard"
-                                    onClick={copyToClipboard}
-                                    variant='flat'
-                                    id="copy-address"
-                                    data-tooltip-content="Copy address"
-                                >
-                                    <span className="">{walletPretier(activeAccount?.address, 8)}</span>
-                                    <ClipboardIcon className="h-5 w-5" aria-hidden="true" />
-                                </Button>
-                                <Button
-                                    color="danger" 
-                                    variant="light"
-                                    disableRipple
-                                    onClick={() => handleDisconnect()}
-                                >
-                                    Disconnect
-                                </Button>
-                            </ModalBody>
-                        </>
-                    )}
-                </ModalContent>
-            </Modal>
+            {activeWallet && <ModalWalletInfo
+                isOpen={isOpenModal}
+                onClose={handleCloseModal}
+                activeAccount={activeAccount}
+                activeWallet={activeWallet}
+                handleDisconnect={handleDisconnect}
+            />}
         </>
     )
 }

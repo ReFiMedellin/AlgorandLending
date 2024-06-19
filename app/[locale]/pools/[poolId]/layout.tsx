@@ -6,7 +6,7 @@ export default function BlogLayout({
   children: React.ReactNode;
 }) {
   //@ts-ignore
-  const poolId = children?.props.segmentPath[3][1]
+  const poolId = children?.props.segmentPath[5][1]
   console.log(poolId)
   return (
     <>
